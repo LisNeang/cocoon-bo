@@ -271,4 +271,19 @@ class Product extends CoreModel {
     {
         $this->type_id = $type_id;
     }
+
+    public static function findAllBackOfficeHomepage()
+    {
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT id, name
+            FROM product
+            ORDER BY id DESC
+            LIMIT 3
+        ';
+        $pdoStatement = $pdo->query($sql);
+        $products = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+        
+        return $products;
+    }
 }

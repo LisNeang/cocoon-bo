@@ -169,7 +169,7 @@ class Category extends CoreModel {
             LIMIT 3
         ';
         $pdoStatement = $pdo->query($sql);
-        $categories = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
+        $categories = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         
         return $categories;
     }

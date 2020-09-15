@@ -121,4 +121,5 @@ class Type extends CoreModel {
     {
         $this->footer_order = $footer_order;
     }
+    
 }
