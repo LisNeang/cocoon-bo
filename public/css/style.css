@@ -1,0 +1,136 @@
+.col-actions {
+  width: 60px;
+}
+
+.navbar-dark{
+  background-color: #1D3147!important;
+}
+
+
+/*navbar-dark navbar-dark
+#79ded0
+678bef
+1D3147
+*/
+
+
+.btn-outline-info {
+    color: #79ded0;
+   
+}
+
+.btn-blue{
+  background-color: #10b4ba;
+  border-color: #10b4ba;
+  color: #fff;
+}
+
+.btn-blue:hover{
+background-color: #10b4ba;
+border-color: #10b4ba;
+color: #fff;
+}
+
+
+.btn-warning{
+  background-color: none!important;
+}
+
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: none;
+  color: #333;
+  background-color: #fff;;
+  border-bottom: none;
+  padding: 20px 0 0 30px;
+  font-size: 23px;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+  font-size: 1.2rem!important;
+}
+
+
+.btn-warning {
+  color: #212529;
+  background-color: #fff;
+  border: none;
+  /* border-color: #ffc107; */
+}
+
+
+.btn-warning:hover {
+  background-color: #fff;
+  color: #1D3147;
+}
+
+
+.btn-danger {
+  color: #ffffff;
+  background-color: #1D3147;
+  border-color: #1D3147;
+}
+
+
+.btn-danger:hover {
+  color: #ffffff;
+  background-color: #1D3147;
+  border-color: #1D3147;
+}
+
+.btn-danger:focus {
+  color: #ffffff;
+  background-color: #1D3147;
+  border-color: #1D3147;
+}
+
+.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {
+  color: #fff;
+  background-color: #1D3147;
+  border-color: #1D3147;
+}
+
+
+.card-header{
+  color: #12a0a5!important;
+}
+
+
+.table td, .table th {
+  padding: .95rem!important;
+}
+
+.table td, .table th {
+  padding: 2.4rem 0 0 0!important;
+}
+
+.message{
+  color: #b5b5b5!important;
+  font-size: 2rem;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #10b4ba;
+  border-color: #10b4ba;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #10b4ba;
+  border-color: #10b4ba;
+}
+
+.btn-success:focus {
+  color: #fff;
+  background-color: #12a0a5;
+  border-color: #12a0a5;
+}
+
+
+.btn-success: {
+  color: #fff;
+  background-color: #12a0a5;
+  border-color: #12a0a5;
+}
