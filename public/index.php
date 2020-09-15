@@ -41,6 +41,7 @@ else {
 // 4. Le nom de la route : pour identifier la route, on va suivre une convention
 //      - "NomDuController-NomDeLaMéthode"
 //      - ainsi pour la route /, méthode "home" du MainController => "main-home"
+/*ancienne methode
 $router->map(
     'GET',
     '/',
@@ -51,6 +52,9 @@ $router->map(
     'main-home'
 );
 
+*/
+
+$router->map('GET', '/', 'MainController::home', 'main-home');
 
 /* -------------
 --- DISPATCH ---
@@ -64,5 +68,10 @@ $match = $router->match();
 // 1er argument : la variable $match retournée par AltoRouter
 // 2e argument : le "target" (controller & méthode) pour afficher la page 404
 $dispatcher = new Dispatcher($match, '\App\Controllers\ErrorController::err404');
+
+//pour éviter de répéter partout le namespace, tx ben
+$dispatcher->setControllersNamespace('\App\Controllers');
+
+
 // Une fois le "dispatcher" configuré, on lance le dispatch qui va exécuter la méthode du controller
 $dispatcher->dispatch();
