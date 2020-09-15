@@ -150,4 +150,26 @@ class Category extends CoreModel {
         
         return $categories;
     }
+
+
+    /**
+     * Récupérer les 3 catégories sur la home du bo
+     * 
+     * @return Category[]
+     */
+    public function findAllBackOfficeHomepage()
+    {
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT id, name
+            FROM category
+            WHERE home_order > 0
+            ORDER BY updated_at DESC
+            LIMIT 3
+        ';
+        $pdoStatement = $pdo->query($sql);
+        $categories = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
+        
+        return $categories;
+    }
 }
