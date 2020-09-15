@@ -154,10 +154,11 @@ class Category extends CoreModel {
 
     /**
      * Récupérer les 3 catégories sur la home du bo
+     * la méthode est static pour qu on puisse l'appeler sans avoir à créer d'instance de category !
      * 
      * @return Category[]
      */
-    public function findAllBackOfficeHomepage()
+    public static function findAllBackOfficeHomepage()
     {
         $pdo = Database::getPDO();
         $sql = '

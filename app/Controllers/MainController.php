@@ -16,8 +16,15 @@ class MainController extends CoreController {
      */
     public function home()
     {
+        /*
         $categoryModel = new Category;
         $homeCategories = $categoryModel->findAllBackOfficeHomePage();
+        */
+
+        //Pour appeler une methode statique, on utilise pamayim nekudotayim( les doubles 2 points)
+       // au dessus lancien code. En dessous quand on utilise une methode statique, on peut appeler la methode directement comme ça, sans la flèche
+        $homeCategories = Category::findAllBackOfficeHomepage();
+
 
     
         // On appelle la méthode show() de l'objet courant
