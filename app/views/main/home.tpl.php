@@ -9,7 +9,7 @@
             <div class="card-body">
                 <table class="table table-hover">
                     <thead>
-                        <tr>
+                        <tr class="theight">
                             <th scope="col">#</th>
                             <th scope="col">Nom</th>
                             <th scope="col"></th>
