@@ -43,7 +43,7 @@
 
                     </tbody>
                 </table>
-                <a href="categories.html" class="btn btn-block btn-blue">Voir plus</a>
+                <a href="<?= $router->generate('category-list') ?>" class="btn btn-block btn-blue">Voir plus</a>
             </div>
         </div>
     </div>
