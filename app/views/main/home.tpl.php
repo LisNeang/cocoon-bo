@@ -22,7 +22,7 @@
                             <th scope="row"><?= $category->getId()?></th>
                             <td><?= $category->getName()?></td>
                             <td class="text-right">
-                                <a href="" class="btn btn-sm btn-warning">
+                                <a href="<?= $router->generate('product-add') ?>" class="btn btn-sm btn-warning">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
                                 <!-- Example single danger button -->

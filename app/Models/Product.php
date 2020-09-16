@@ -303,4 +303,6 @@ class Product extends CoreModel {
         
         return $products;
     }
+
+
 }

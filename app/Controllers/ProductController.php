@@ -20,4 +20,16 @@ class ProductController extends CoreController {
         //on passe ce tableau de résultats à la vue
         $this->show('product/list', ["products" => $products]);
     }
+
+
+
+  
+    public function add()
+    {
+        //récupère toutes les categories, sous forme d'instance de mon modèle Category
+       // $products = Product::findAll();
+        //on passe ce tableau de résultats à la vue
+
+        $this->show('product/add');
+    }
 }
