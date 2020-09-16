@@ -5,7 +5,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nom</th>
-                <th scope="col">Prix</th>
+                <th scope="col">Description</th>
                 <th scope="col"></th>
             </tr>
         </thead>

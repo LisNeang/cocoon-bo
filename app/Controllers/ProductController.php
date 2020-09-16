@@ -4,8 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Product;
 
-// Si j'ai besoin du Model Category
-// use App\Models\Category;
 
 class ProductController extends CoreController {
 

@@ -112,16 +112,6 @@ class Product extends CoreModel {
         $this->name = $name;
     }
 
-    /**
-     * Get the value of description
-     *
-     * @return  string
-     */ 
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
 
      /**
      * Get the value of description
@@ -131,6 +121,19 @@ class Product extends CoreModel {
     public function getshortDescription()
     {
         return mb_substr($this->description, 0, 45) .'...';
+    }
+
+
+    
+
+    /**
+     * Get the value of description
+     *
+     * @return  string
+     */ 
+    public function getDescription()
+    {
+        return $this->description;
     }
 
 
