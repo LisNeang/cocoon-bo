@@ -157,8 +157,14 @@ thead{
 
 .theight{
   padding: 5px;
+  background-color: #eee;
 }
 
 .navbar{
   padding: 1rem 1rem;
+}
+
+
+.table {
+  margin-bottom: 0; 
 }
