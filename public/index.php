@@ -62,6 +62,10 @@ $router->map('GET', '/category/list', 'CategoryController#list', 'category-list'
 $router->map('GET', '/product/list', 'ProductController#list', 'product-list');
 
 
+//route pour l'affichage des categories
+$router->map('GET', '/product/list', 'ProductController#list', 'product-list');
+
+
 /* -------------
 --- DISPATCH ---
 --------------*/
