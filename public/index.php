@@ -51,10 +51,12 @@ $router->map(
     ],
     'main-home'
 );
-
 */
+$router->map('GET', '/', 'MainController#home', 'main-home');
 
-$router->map('GET', '/', 'MainController::home', 'main-home');
+//route pour l'affichage des categories
+$router->map('GET', '/category/list', 'CategoryController#list', 'category-list');
+
 
 /* -------------
 --- DISPATCH ---
