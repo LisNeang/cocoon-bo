@@ -86,7 +86,7 @@
                       <?php endforeach; ?>
                     </tbody>
                 </table>
-                <a href="products.html" class="btn btn-block btn-blue">Voir plus</a>
+                <a href="<?= $router->generate('product-list') ?>" class="btn btn-block btn-blue">Voir plus</a>
             </div>
         </div>
     </div>

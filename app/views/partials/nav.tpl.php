@@ -15,7 +15,7 @@
                         <a class="nav-link" href="<?= $router->generate('category-list') ?>">Catégories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Produits</a>
+                        <a class="nav-link" href="<?= $router->generate('product-list') ?>">Produits</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Types</a>

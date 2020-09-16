@@ -58,6 +58,13 @@ $router->map('GET', '/', 'MainController#home', 'main-home');
 $router->map('GET', '/category/list', 'CategoryController#list', 'category-list');
 
 
+//route pour l'affichage des produits
+$router->map('GET', '/product/list', 'ProductController#list', 'product-list');
+
+
+
+
+
 /* -------------
 --- DISPATCH ---
 --------------*/
