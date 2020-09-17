@@ -3,15 +3,12 @@
     
     <form action="" method="POST" class="mt-5">
         <div class="form-group">
-            <label for="name">nom</label>
-            <input name="name" type="text" class="form-control" id="name" placeholder="Nom de la catégorie">
+            <label for="name">Nom</label>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Nom du produit">
         </div>
         <div class="form-group">
-            <label for="description">description</label>
+            <label for="description">Description</label>
             <input name="description" type="text" class="form-control" id="decription" placeholder="description" aria-describedby="subtitleHelpBlock">
-            <small id="subtitleHelpBlock" class="form-text text-muted">
-                Sera affiché sur la page d'accueil comme bouton devant l'image
-            </small>
         </div>
         <div class="form-group">
             <label for="picture">Image</label>

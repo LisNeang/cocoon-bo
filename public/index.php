@@ -56,6 +56,8 @@ $router->map('GET', '/', 'MainController#home', 'main-home');
 
 //route pour l'affichage des categories
 $router->map('GET', '/category/list', 'CategoryController#list', 'category-list');
+//route pour rajouter une category
+$router->map('GET|POST', '/catrgory/add', 'CategoryController#add', 'category-add');
 
 
 //route pour l'affichage des categories
