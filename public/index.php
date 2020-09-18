@@ -8,6 +8,9 @@
 // mais aussi d'activer le chargement automatique des classes (convention PSR-4)
 require_once '../vendor/autoload.php';
 
+//activer les sessions !
+session_start();
+
 /* ------------
 --- ROUTAGE ---
 -------------*/
@@ -41,6 +44,7 @@ else {
 // 4. Le nom de la route : pour identifier la route, on va suivre une convention
 //      - "NomDuController-NomDeLaMéthode"
 //      - ainsi pour la route /, méthode "home" du MainController => "main-home"
+/*ancienne methode
 $router->map(
     'GET',
     '/',
@@ -50,6 +54,21 @@ $router->map(
     ],
     'main-home'
 );
+*/
+$router->map('GET', '/', 'MainController#home', 'main-home');
+
+//route pour l'affichage des categories
+$router->map('GET', '/category/list', 'CategoryController#list', 'category-list');
+//route pour rajouter une category
+$router->map('GET|POST', '/category/add', 'CategoryController#add', 'category-add');
+
+
+//route pour l'affichage des categories
+$router->map('GET', '/product/list', 'ProductController#list', 'product-list');
+
+
+//route pour rajouter produit
+$router->map('GET|POST', '/product/add', 'ProductController#add', 'product-add');
 
 
 /* -------------
@@ -64,5 +83,10 @@ $match = $router->match();
 // 1er argument : la variable $match retournée par AltoRouter
 // 2e argument : le "target" (controller & méthode) pour afficher la page 404
 $dispatcher = new Dispatcher($match, '\App\Controllers\ErrorController::err404');
+
+//pour éviter de répéter partout le namespace, tx ben
+$dispatcher->setControllersNamespace('\App\Controllers');
+
+
 // Une fois le "dispatcher" configuré, on lance le dispatch qui va exécuter la méthode du controller
 $dispatcher->dispatch();

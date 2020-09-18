@@ -54,7 +54,7 @@ class Product extends CoreModel {
      * @param int $productId ID du produit
      * @return Product
      */
-    public function find($productId)
+    public static function find($productId)
     {
         // récupérer un objet PDO = connexion à la BDD
         $pdo = Database::getPDO();
@@ -82,7 +82,7 @@ class Product extends CoreModel {
      * 
      * @return Product[]
      */
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `product`';
@@ -112,6 +112,20 @@ class Product extends CoreModel {
         $this->name = $name;
     }
 
+
+     /**
+     * Get the value of description
+     *
+     * @return  string
+     */ 
+    public function getshortDescription()
+    {
+        return mb_substr($this->description, 0, 45) .'...';
+    }
+
+
+    
+
     /**
      * Get the value of description
      *
@@ -121,6 +135,9 @@ class Product extends CoreModel {
     {
         return $this->description;
     }
+
+
+
 
     /**
      * Set the value of description
@@ -271,4 +288,83 @@ class Product extends CoreModel {
     {
         $this->type_id = $type_id;
     }
+
+
+         /**
+     * Methode permettant d'ajouter un enregistrement dans la table category
+     * objt courant doit contenir toutes lesdonnées à ajouter : 1 propriété => 1 colonne dans la table
+     * 
+     * @return bool
+     */
+    public function insert()
+    {
+        //récupération de l'objet PDO représentant la connexion à la DB
+
+        $pdo = Database::getPDO();
+
+        //Ecriture de la requête INSERT INTO
+        //les paramètres commencant par des : sont à remplacer plus tard !
+        //ils nous protègent des injections SQL et nous évite de gérer les guillements dans les valeurs !
+        $sql = "
+            INSERT INTO `product` (name, description, picture, price, rate, status, brand_id, category_id, type_id)
+            VALUES (:name, :description, :picture, :price, :rate, :status, :brand_id, :category_id, :type_id)
+        ";
+
+        //on envoie notre requête au serveur MySQL, sans l'exécuter
+        $stmt = $pdo->prepare($sql);
+
+        //on peut utiliser les bindValue() ou le tableau dans la méthode execute, c'est pareil
+        //$stmt->bindValue(":name", $this->name);
+        //$stmt->bindValue(":subtitle", $this->subtitle);
+        //$stmt->bindValue(":picture", $this->picture);
+
+        //on exécute la requête, en remplacant les paramètres de la requête par ces valeurs
+        //si on indique les valeurs remplacant les paramètres de la requête ici, on ne fait pas les bindValue()
+        //c'est l'un ou l'autre ! 
+        $insertedRows = $stmt->execute([
+            ":name" => $this->name,
+            ":description" => $this->description,
+            ":picture" => $this->picture,
+            ":price" => $this->price,
+            ":rate" => $this->rate,
+            ":status" => $this->status,
+
+            ":brand_id" => $this->brand_id,
+            ":category_id" => $this->category_id,
+            ":type_id" => $this->type_id,
+
+        ]);
+
+         // Si au moins une ligne ajoutée
+         if ($insertedRows > 0) {
+            // Alors on récupère l'id auto-incrémenté généré par MySQL
+            $this->id = $pdo->lastInsertId();
+
+            // On retourne VRAI car l'ajout a parfaitement fonctionné
+            return true;
+            // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
+        }
+
+        // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
+        return false;
+    }
+
+
+
+    public static function findAllBackOfficeHomepage()
+    {
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT id, name
+            FROM product
+            ORDER BY id DESC
+            LIMIT 3
+        ';
+        $pdoStatement = $pdo->query($sql);
+        $products = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+        
+        return $products;
+    }
+
+
 }
