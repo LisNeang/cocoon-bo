@@ -36,10 +36,38 @@
 
         <div class="form-group">
             <label for="picture">Status</label>
-            <select name="status" type="text" class="form-control" id="price" placeholder="Status">
+            <select name="status" type="text" class="form-control" id="status" placeholder="Status">
             <option value="0">Pas disponible</option>
             <option value="1">Disponible</option>
             </select>
         </div>
+
+        <div class="form-group">
+            <label for="brand_id">Marques</label>
+            <select name="brand_id" type="text" class="form-control" id="brand_id" placeholder="Marques">
+                <?php foreach($allBrands as $brand): ?>
+            <option value="<?= $brand->getId() ?>"><?= $brand->getName() ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="category_id">Categories</label>
+            <select name="category_id" type="text" class="form-control" id="category_id" placeholder="choississez votre categorie">
+                <?php foreach($allCategories as $categorie): ?>
+            <option value="<?= $categorie->getId() ?>"><?= $categorie->getName() ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="type_id">Type de produit</label>
+            <select name="type_id" type="text" class="form-control" id="type_id" placeholder="Types">
+                <?php foreach($allTypes as $type): ?>
+            <option value="<?= $type->getId() ?>"><?= $type->getName() ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary btn-block mt-5">Valider</button>
     </form>

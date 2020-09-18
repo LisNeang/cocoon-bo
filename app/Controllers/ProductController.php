@@ -8,7 +8,8 @@ use App\Models\Product;
 use App\Models\Type;
 
 
-class ProductController extends CoreController {
+class ProductController extends CoreController
+{
 
     /**
      * Méthode s'occupant de la page d'accueil
@@ -31,11 +32,11 @@ class ProductController extends CoreController {
     public function add()
     {
         dump($_POST);
-        //est-ce que le form est soumis ?? 
+        //est-ce que le form est soumis ??
         //si oui, on le traite
-        if (!empty($_POST)){
+        if (!empty($_POST)) {
             //récupère les données du form
-            //le strip_tags vire les éventuelles balises HTML des données 
+            //le strip_tags vire les éventuelles balises HTML des données
             //ça nous protège des attaques XSS
             $name = strip_tags(filter_input(INPUT_POST, 'name'));
             $description = strip_tags(filter_input(INPUT_POST, 'description'));
@@ -43,6 +44,10 @@ class ProductController extends CoreController {
             $price = strip_tags(filter_input(INPUT_POST, 'price'));
             $rate = strip_tags(filter_input(INPUT_POST, 'rate'));
             $status = strip_tags(filter_input(INPUT_POST, 'status'));
+            
+            $brandId = strip_tags(filter_input(INPUT_POST, 'brand_id'));
+            $categoryId = strip_tags(filter_input(INPUT_POST, 'category_id'));
+            $typeId= strip_tags(filter_input(INPUT_POST, 'type_id'));
             
             //début d'exemple de démo de comment on ferait un insert
             //code très incomplet
@@ -57,16 +62,26 @@ class ProductController extends CoreController {
             //dans la BBD, brand_id, category_id et type_id sont repquis (infos qui proviennent d'autres tableau ( Grace à une requete SQL))
             //Pour l'instant on les met en dur pour voir si ça fonctionne
 
-            $product->setBrandId(1);
+            $product->setBrandId($brandId);
             $product->setCategoryId(1);
             $product->setTypeId(1);
-
-
-            
 
             $product->insert();
         }
 
-        $this->show('product/add');
+        //récupère toutes les categories pour construire ma liste déroulante dans le form !
+        // pas besoin d' instancier Brand car la methode est en static$brandModel = new Brand();
+        $allBrands = Brand::findAll();
+
+        $allCategories = Category::findAll();
+
+        $allTypes = Type::findAll();
+
+        $this->show('product/add', [
+            "allBrands" =>  $allBrands,
+            "allCategories" =>  $allCategories,
+            "allTypes" =>  $allTypes
+
+        ]);
     }
 }
