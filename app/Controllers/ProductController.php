@@ -31,7 +31,9 @@ class ProductController extends CoreController
 
     public function add()
     {
-        dump($_POST);
+        // Le dump bloque la redirection du header, il faut l'enlever pour que la redirection se fasse
+        //dump($_POST);
+
         //est-ce que le form est soumis ??
         //si oui, on le traite
         if (!empty($_POST)) {
@@ -63,10 +65,18 @@ class ProductController extends CoreController
             //Pour l'instant on les met en dur pour voir si ça fonctionne
 
             $product->setBrandId($brandId);
-            $product->setCategoryId(1);
-            $product->setTypeId(1);
+            $product->setCategoryId($categoryId);
+            $product->setTypeId($typeId);
 
-            $product->insert();
+
+            //si l'insert s'est bien passé...
+            if ($product->insert()){
+                $_SESSION['alert'] = "Votre produit a bien été ajouté";
+                //on se redirige vers la liste des produits
+                //attention bien enlever le dump($_POST);, sinon la redirection ne peut pas se faire
+                header("Location: list");
+                die();
+            };
         }
 
         //récupère toutes les categories pour construire ma liste déroulante dans le form !

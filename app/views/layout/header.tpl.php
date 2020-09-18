@@ -28,3 +28,13 @@ include __DIR__.'/../partials/nav.tpl.php';
 ?>
 
 <div class="container my-4">
+    <?php
+        if (!empty($_SESSION['alert'])):
+    ?>
+
+    <div class="alert alert-sucess blue"><?= $_SESSION['alert']?></div>
+    <?php
+    //supprimer le message de la session pour ne pas le réafficher sur la prochaine page
+    unset($_SESSION['alert']);
+        endif;
+        ?>

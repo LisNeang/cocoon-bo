@@ -8,6 +8,9 @@
 // mais aussi d'activer le chargement automatique des classes (convention PSR-4)
 require_once '../vendor/autoload.php';
 
+//activer les sessions !
+session_start();
+
 /* ------------
 --- ROUTAGE ---
 -------------*/
