@@ -32,9 +32,10 @@ include __DIR__.'/../partials/nav.tpl.php';
         if (!empty($_SESSION['alert'])):
     ?>
 
+    <!--dans productCatalog, il y a le message d'alert -->
     <div class="alert alert-sucess blue"><?= $_SESSION['alert']?></div>
     <?php
-    //supprimer le message de la session pour ne pas le réafficher sur la prochaine page
+    //supprimer le message de la session pour ne pas le réafficher sur la prochaine page - ex on raffraichit la page, le message disparait
     unset($_SESSION['alert']);
         endif;
         ?>

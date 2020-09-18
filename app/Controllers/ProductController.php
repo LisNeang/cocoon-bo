@@ -71,6 +71,8 @@ class ProductController extends CoreController
 
             //si l'insert s'est bien passé...
             if ($product->insert()){
+                //ajoute un message qui s'affichera sur la prochaine page !
+                //pour l'affichage, voir dans header.tpl.php
                 $_SESSION['alert'] = "Votre produit a bien été ajouté";
                 //on se redirige vers la liste des produits
                 //attention bien enlever le dump($_POST);, sinon la redirection ne peut pas se faire

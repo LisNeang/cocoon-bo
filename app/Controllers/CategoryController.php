@@ -24,8 +24,11 @@ class CategoryController extends CoreController {
     }
 
     public function add()
-    {
-        dump($_POST);
+    {   
+        // Le dump bloque la redirection du header après validation formulaire produt add ou category add, il faut l'enlever pour que la redirection se fasse
+       // dump($_POST);
+
+       
         //est-ce que le form est soumis ?? 
         //si oui, on le traite
         if (!empty($_POST)){
@@ -45,7 +48,16 @@ class CategoryController extends CoreController {
             $category->setSubtitle($subtitle);
             $category->setPicture($picture);
 
-            $category->insert();
+            //si l'insert s'est bien passé...
+            if ($category->insert()){
+                //ajoute un message qui s'affichera sur la prochaine page !
+                //pour l'affichage, voir dans header.tpl.php
+                $_SESSION['alert'] = "Votre catégorie a bien été ajoutée";
+                //on se redirige vers la liste des produits
+                //attention bien enlever le dump($_POST);, sinon la redirection ne peut pas se faire
+                header("Location: list");
+                die();
+            };
         }
 
         $this->show('category/add');
