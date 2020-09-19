@@ -97,8 +97,10 @@ class CategoryController extends CoreController {
                 //header("Location: list");
                // die();
                //autre methode (penser à bien activier la session avec session start dans index)
-               global $router;
-               header("Location: " . $router->generate("category-list"));
+               //global $router;
+               //header("Location: " . $router->generate("category-list"));
+               //voir le CoreController.php (methode pour la redirection route)
+              $this->redirectToRoute("category-list");
                die();
             }
         }
