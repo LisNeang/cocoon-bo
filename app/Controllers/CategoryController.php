@@ -62,4 +62,12 @@ class CategoryController extends CoreController {
 
         $this->show('category/add');
     }
+
+    public function update($categoryId)
+    {   
+   
+        $this->show('category/update');
+    }
+
+
 }

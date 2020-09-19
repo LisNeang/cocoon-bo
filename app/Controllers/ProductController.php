@@ -80,6 +80,9 @@ class ProductController extends CoreController
                 die();
             };
         }
+        
+
+
 
         //récupère toutes les categories pour construire ma liste déroulante dans le form !
         // pas besoin d' instancier Brand car la methode est en static$brandModel = new Brand();
