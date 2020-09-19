@@ -1,4 +1,4 @@
-<a href="<?= $router->generate('category-add') ?>" class="btn btn-success float-right">Retour</a>
+<a href="<?= $router->generate('category-list') ?>" class="btn btn-success float-right">Retour</a>
     <h2>Modifier une category</h2>
     
     <form action="" method="POST" class="mt-5">

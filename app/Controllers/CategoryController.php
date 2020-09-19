@@ -35,7 +35,8 @@ class CategoryController extends CoreController {
             //récupère les données du form
             //le strip_tags vire les éventuelles balises HTML des données 
             //ça nous protège des attaques XSS
-            $name = strip_tags(filter_input(INPUT_POST, 'name'));
+            //Le FILTER_SANITIZE_FULL_SPECIAL_CHARS enlève aussi les balises ! (voir dans la doc php, plusieurs filter_sanitize...)
+            $name = strip_tags(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
             $description = strip_tags(filter_input(INPUT_POST, 'description'));
             $subtitle = strip_tags(filter_input(INPUT_POST, 'subtitle'));
             $picture = strip_tags(filter_input(INPUT_POST, 'picture'));
@@ -70,17 +71,37 @@ class CategoryController extends CoreController {
         $category = Category::find($categoryId);
 
         //si le formulaire est soumis
-
-            //récupère les données du form (en les purifiant)
+        if (!empty($_POST)) {
+            //récupère les données du form (en les purifiant, voir dans la methode add au dessus)
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+            $description = strip_tags(filter_input(INPUT_POST, 'description'));
+            $subtitle = strip_tags(filter_input(INPUT_POST, 'subtitle'));
+            $picture = strip_tags(filter_input(INPUT_POST, 'picture'));
 
             //les injecter dans mon instance de catégorie
+            $category->setName($name);
+            $category->setDescription($description);
+            $category->setSubtitle($subtitle);
+            $category->setPicture($picture);
 
             //sauvegarde les changements en bdd
-
-            //prépare un message à affichr sur les prochaine page
+            if ($category->update()){
+                //prepare un message à afficher sur la prochaine page
+                $_SESSION['alert'] = 'Categorie modifiée ! Bravo !';
             
-            //redirection
 
+            //redirection - on le met en place seuleemtn si tout marche bien précédemment
+             //on se redirige vers la liste des produits
+                //attention bien enlever le dump($_POST);, sinon la redirection ne peut pas se faire
+                //methode de redirection utilisé pour add(au dessus)
+                //header("Location: list");
+               // die();
+               //autre methode (penser à bien activier la session avec session start dans index)
+               global $router;
+               header("Location: " . $router->generate("category-list"));
+               die();
+            }
+        }
         $this->show('category/update', ["category" => $category]);
     }
 
