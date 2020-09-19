@@ -69,6 +69,18 @@ class CategoryController extends CoreController {
         //récupère la catégorie dans la bdd, pour préremplir le form
         $category = Category::find($categoryId);
 
+        //si le formulaire est soumis
+
+            //récupère les données du form (en les purifiant)
+
+            //les injecter dans mon instance de catégorie
+
+            //sauvegarde les changements en bdd
+
+            //prépare un message à affichr sur les prochaine page
+            
+            //redirection
+
         $this->show('category/update', ["category" => $category]);
     }
 
