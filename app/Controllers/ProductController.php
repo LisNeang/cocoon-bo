@@ -80,6 +80,9 @@ class ProductController extends CoreController
                 die();
             };
         }
+        
+
+
 
         //récupère toutes les categories pour construire ma liste déroulante dans le form !
         // pas besoin d' instancier Brand car la methode est en static$brandModel = new Brand();
@@ -96,4 +99,79 @@ class ProductController extends CoreController
 
         ]);
     }
+
+
+
+    public function update($productId)
+    {   
+
+        //récupère le produit dans la bdd, pour préremplir le form
+        $product = Product::find($productId);
+
+
+        //si le formulaire est soumis
+        if (!empty($_POST)) {
+            //récupère les données du form (en les purifiant, voir dans la methode add au dessus)
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+            $description = strip_tags(filter_input(INPUT_POST, 'description'));
+            $picture = strip_tags(filter_input(INPUT_POST, 'picture'));
+            $price = strip_tags(filter_input(INPUT_POST, 'price'));
+            $rate = filter_input(INPUT_POST, 'rate', FILTER_SANITIZE_NUMBER_INT);
+            $status = strip_tags(filter_input(INPUT_POST, 'status'));
+            $brandId = strip_tags(filter_input(INPUT_POST, 'brand_id'));
+            $categoryId = strip_tags(filter_input(INPUT_POST, 'category_id'));
+            $typeId = strip_tags(filter_input(INPUT_POST, 'type_id'));
+
+            //les injecter dans mon instance de catégorie
+            $product->setName($name);
+            $product->setDescription($description);
+            $product->setPicture($picture);
+            $product->setPrice($price);
+            $product->setRate($rate);
+            $product->setStatus($status);
+            $product->setBrandId($brandId);
+            $product->setCategoryId($categoryId);
+            $product->setTypeId($typeId);
+
+
+    
+
+
+
+            //sauvegarde les changements en bdd
+            if ($product->update()){
+                //prepare un message à afficher sur la prochaine page
+                $_SESSION['alert'] = 'Produit modifiée ! Bravo !';
+            
+
+            //redirection - on le met en place seulement si tout marche bien précédemment
+             //on se redirige vers la liste des produits
+                //attention bien enlever le dump($_POST);, sinon la redirection ne peut pas se faire
+                //methode de redirection utilisé pour add(au dessus)
+                //header("Location: list");
+               // die();
+               //autre methode (penser à bien activier la session avec session start dans index)
+               //global $router;
+               //header("Location: " . $router->generate("category-list"));
+               //voir le CoreController.php (methode pour la redirection route)
+              $this->redirectToRoute("product-list");
+               die();
+            }
+        }
+         //récupère toutes les categories pour construire ma liste déroulante dans le form !
+        // pas besoin d' instancier Brand car la methode est en static$brandModel = new Brand();
+        $allBrands = Brand::findAll();
+
+        $allCategories = Category::findAll();
+
+        $allTypes = Type::findAll();
+
+        $this->show('product/update', [
+            "product" => $product,
+            "allBrands" =>  $allBrands,
+            "allCategories" =>  $allCategories,
+            "allTypes" =>  $allTypes
+            ]);
+    }
 }
+

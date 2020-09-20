@@ -39,4 +39,17 @@ class CoreController {
         require_once __DIR__.'/../views/'.$viewName.'.tpl.php';
         require_once __DIR__.'/../views/layout/footer.tpl.php';
     }
+
+    //permet de rediriger facilement vers une route de notre application
+    public function redirectToRoute($route)
+    {
+        //redirection
+        global $router;
+        header("Location: " .$router->generate($route));
+        die();
+    }
+
+
+
+
 }

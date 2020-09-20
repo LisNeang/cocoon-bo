@@ -59,16 +59,28 @@ $router->map('GET', '/', 'MainController#home', 'main-home');
 
 //route pour l'affichage des categories
 $router->map('GET', '/category/list', 'CategoryController#list', 'category-list');
+
 //route pour rajouter une category
 $router->map('GET|POST', '/category/add', 'CategoryController#add', 'category-add');
 
+//route pour modifier une catégorie.
+//On a besoin de connaitre l'id du produit modifié. Grâce à Altorouter on peut utliser [i:categoryId] ou [i:id] pour spécifier une categorie en particuler
+$router->map('GET|POST', '/category/update/[i:categoryId]', 'CategoryController#update', 'category-update');
 
-//route pour l'affichage des categories
+
+
+//route pour l'affichage des produits
 $router->map('GET', '/product/list', 'ProductController#list', 'product-list');
 
 
 //route pour rajouter produit
 $router->map('GET|POST', '/product/add', 'ProductController#add', 'product-add');
+
+//route pour modifier un produit.
+//On a besoin de connaitre l'id du produit modifié. Grâce à Altorouter on peut utliser [i:categoryId] ou [i:id] pour spécifier une categorie en particuler
+$router->map('GET|POST', '/product/update/[i:productId]', 'ProductController#update', 'product-update');
+
+
 
 
 /* -------------

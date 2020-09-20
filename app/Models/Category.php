@@ -177,6 +177,46 @@ class Category extends CoreModel {
         return false;
     }
 
+    /**
+     * Met à jour en BDD une instance de category
+     * @return bool
+     */
+    public function update()
+    {
+        //récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+        //notre requête sql de mise à jour, avec des paramètre nommés
+        $sql = "UPDATE category
+                SET
+                name = :name,
+                description = :description,
+                subtitle = :subtitle,
+                picture = :picture,
+                updated_at = NOW()
+                where id = :id
+                ";
+            //ATTENTION : ne pas oublier de mettre un WHERE pour un update car sinon aça change sur toutes les categories (fait péter la bdd)
+
+        //envoie la requête chez musql
+        $stmt = $pdo->prepare($sql);
+        
+        //$queryworked sera true ou false, en fonction de si la requête a foiré
+        $queryWorked = $stmt->execute([
+            //remplace les paramètres par nos valeurs
+            ":name" => $this->getName(),
+            ":description" => $this->getDescription(),
+            ":subtitle" => $this->getSubtitle(),
+            ":picture" => $this->getPicture(),
+            ":id" => $this->getId()
+            
+        ]);
+
+        return $queryWorked;
+    }
+
+    
+
 
 
     /**
@@ -185,7 +225,7 @@ class Category extends CoreModel {
      * @param int $categoryId ID de la catégorie
      * @return Category
      */
-    public function find($categoryId)
+    public static function find($categoryId)
     {
         // se connecter à la BDD
         $pdo = Database::getPDO();

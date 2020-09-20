@@ -48,6 +48,59 @@ class Product extends CoreModel {
      */
     private $type_id;
     
+
+    /**
+     * Met à jour en BDD une instance de product
+     * @return bool
+     */
+    public function update()
+    {
+        //récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+        //notre requête sql de mise à jour, avec des paramètre nommés
+        $sql = "UPDATE product
+                SET
+                name = :name,
+                description = :description,
+                picture = :picture,
+                price = :price,
+                rate = :rate,
+                status = :status,
+                brand_id = :brandId,
+                category_id = :categoryId,
+                type_id = :typeId,
+                updated_at = NOW()
+                where id = :id
+                ";
+            //ATTENTION : ne pas oublier de mettre un WHERE pour un update car sinon ça change sur toutes les categories (fait péter la bdd)
+
+        //envoie la requête chez mysql
+        $stmt = $pdo->prepare($sql);
+        
+        //$queryworked sera true ou false, en fonction de si la requête a foiré
+        $queryWorked = $stmt->execute([
+            //remplace les paramètres par nos valeurs
+            ":name" => $this->getName(),
+            ":description" => $this->getDescription(),
+            ":picture" => $this->getPicture(),
+            ":price" => $this->getPrice(),
+            ":rate" => $this->getRate(),
+            ":status" => $this->getStatus(),
+            ":brandId" => $this->getBrandId(),
+            ":categoryId" => $this->getCategoryId(),
+            ":typeId" => $this->getTypeId(),
+            ":id" => $this->getId()
+
+            
+        ]);
+
+        return $queryWorked;
+    }
+
+
+
+
     /**
      * Méthode permettant de récupérer un enregistrement de la table Product en fonction d'un id donné
      * 
@@ -194,7 +247,7 @@ class Product extends CoreModel {
      *
      * @return  int
      */ 
-    public function getRate()
+    public function getRate() : int
     {
         return $this->rate;
     }
@@ -204,7 +257,7 @@ class Product extends CoreModel {
      *
      * @param  int  $rate
      */ 
-    public function setRate(int $rate)
+    public function setRate($rate)
     {
         $this->rate = $rate;
     }
@@ -229,14 +282,14 @@ class Product extends CoreModel {
         $this->status = $status;
     }
 
-    /**
+        /**
      * Get the value of brand_id
      *
      * @return  int
      */ 
     public function getBrandId()
     {
-        return $this->brandId;
+        return $this->brand_id;
     }
 
     /**
@@ -328,7 +381,6 @@ class Product extends CoreModel {
             ":price" => $this->price,
             ":rate" => $this->rate,
             ":status" => $this->status,
-
             ":brand_id" => $this->brand_id,
             ":category_id" => $this->category_id,
             ":type_id" => $this->type_id,
