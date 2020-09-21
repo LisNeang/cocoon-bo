@@ -3,6 +3,7 @@
 namespace app\Models;
 
 use App\Models\CoreModel;
+use App\Utils\Database;
 
 class AppUser extends CoreModel{
     private $email;
@@ -12,7 +13,19 @@ class AppUser extends CoreModel{
     private $role;
     private $status;
 
-    //créer tous les getters et setters 
+    public static function findByEmail($email)
+    {
+        $pdo = Database::getPDO();
+
+        $sql = "SELECT *
+                FROM app_user
+                WHERE email = :email";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([":email" => $email]);
+
+        return $stmt->fetchObject(self::class);
+    } 
 
 
     /**
