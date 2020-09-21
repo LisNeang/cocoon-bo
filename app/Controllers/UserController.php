@@ -8,11 +8,20 @@ class UserController extends CoreController
 {
     public function login()
     {
+
+        //tableau d'éventuels messages d'erreurs de validation
+        $errorsList = [];
         //si le form st soumis ...
         if(!empty($_POST)){
             //récupère l'email et le mot de passe du formulaire//pas de soucis de securité ici car c'est un select et non un insert
             $email = filter_input(INPUT_POST, 'email');
             $password = filter_input(INPUT_POST, 'password');
+
+
+            //valide l'email
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $errorsList = ["Votre email a mal fonctionné"];
+            };
 
 
             //aller chercher dans la bdd si j'ai bien un user ayant cet email
@@ -30,14 +39,17 @@ class UserController extends CoreController
                     echo "bravo ! ";
                 } 
                  else {
-                echo "mauvais mdp !";
+                $errorsList[] = "mauvais mdp !";
                 }
             }
             else{
-                echo "mauvais email !";
+                $errorsList[] = "mauvais email !";
             }     
-        }   
-        $this->show('user/login', []);
+        }  
+        
+        dump($errorsList);
+        //en 2 arguments on met la liste des erreurs, et dans la views il y a une boucle foreach qui affiche tous les messages d'erreurs
+        $this->show('user/login', ["errorsList" => $errorsList]);
     }
 
 }
