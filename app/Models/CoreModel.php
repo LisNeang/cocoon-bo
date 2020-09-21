@@ -4,7 +4,18 @@ namespace App\Models;
 
 // Classe mère de tous les Models
 // On centralise ici toutes les propriétés et méthodes utiles pour TOUS les Models
-class CoreModel {
+abstract class CoreModel {
+
+    //une methode définie comme abstraite doit absolument être implentée par tous ses enfants !
+    //on ne définit pas ce que fait la fonction, mais comment elle doit être nommée, si elle doit être statique
+    abstract public static function findAll();
+
+    //si je précise un argument ici, les enfants aussi devront avoir un argument !
+    abstract public static function find($id);
+
+    //on peut faire de même pour les methode insert / delete / update (attention toutefois à la non instanciation, comment fiare avec les _this )
+
+
     /**
      * @var int
      */
