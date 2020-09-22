@@ -16,13 +16,7 @@ class UserController extends CoreController
             //récupère l'email et le mot de passe du formulaire//pas de soucis de securité ici car c'est un select et non un insert
             $email = filter_input(INPUT_POST, 'email');
             $password = filter_input(INPUT_POST, 'password');
-
-
-            //valide l'email
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $errorsList = ["Votre email a mal fonctionné"];
-            };
-
+        
 
             //aller chercher dans la bdd si j'ai bien un user ayant cet email
             //nouvelle class à créer (ctrl espace : créer le use  &  après créer la methode findByEmail)
@@ -39,15 +33,21 @@ class UserController extends CoreController
                     echo "bravo ! ";
                 } 
                  else {
-                $errorsList[] = "mauvais mdp !";
+                     //on est libre de mettre ce qu' on veut pour le nom des clefs des champs, ici c'est bien de récupérer le nom du champs
+                $errorsList['password'] = "mauvais mdp !";
                 }
             }
             else{
-                $errorsList[] = "mauvais email !";
-            }     
+                $errorsList['email'] = "mauvais email !";
+            } 
+            
+            //valide l'email
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $errorsList['email'] = "Votre email est mal formé !";
+            }
+
         }  
         
-        dump($errorsList);
         //en 2 arguments on met la liste des erreurs, et dans la views il y a une boucle foreach qui affiche tous les messages d'erreurs
         $this->show('user/login', ["errorsList" => $errorsList]);
     }
