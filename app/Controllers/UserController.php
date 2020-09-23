@@ -27,7 +27,8 @@ class UserController extends CoreController
             //si on trouve le user
             if ($foundUser){
                 //on verifie que son mdp est bon
-                if ($password === $foundUser->getPassword()) {
+                //je compare avec password_verify le password tapé dans le formulaire avec le hasch(du mdp) qui est dans la BDD
+                if (password_verify($password, $foundUser->getPassword())) {
                     //si c'est bon...
                     //connecte le user
                     echo "bravo ! ";
