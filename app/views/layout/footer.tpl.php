@@ -6,7 +6,7 @@
                <?php dump($_SESSION['userObject']) ?>
             
             "Connecté en tant que :" <?= $_SESSION['userObject']->getFirstname() ?> 
-            <a href="<?= $router->generate("user-login") ?>">Déconnexion</a>
+            <a href="<?= $router->generate("user-logout") ?>">Déconnexion</a>
             <?php else: ?>
             Pas connecté <a href="<?= $router->generate("user-login") ?>">Connexion</a>
             <?php endif; ?>

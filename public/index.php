@@ -83,6 +83,9 @@ $router->map('GET|POST', '/product/update/[i:productId]', 'ProductController#upd
 //route le login.
 $router->map('GET|POST', '/login', 'UserController#login', 'user-login');
 
+//route le login.  pas de POST  ici
+$router->map('GET', '/logout', 'UserController#logout', 'user-logout');
+
 
 
 /* -------------

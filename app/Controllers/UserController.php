@@ -5,7 +5,22 @@ namespace App\Controllers;
 use App\Models\AppUser;
 
 class UserController extends CoreController
-{
+{   
+    //gère la deconnexion d'un user
+    public function logout()
+    {
+        //supprime trop de chose !
+        //session_destroy();
+
+        //onn supprime plutôt ce qui est important pour la connexion pour la connexion du user//Pour ne pas supprimer des données utiles - mais bon ça dépend du site
+        unset($_SESSION['userId']);
+        unset($_SESSION['userObject']);
+
+        //après deconnexion redirection à chaque fois vers le template login
+        $this->redirectToRoute('user-login');
+    }
+
+
     public function login()
     {
         //tableau d'éventuels messages d'erreur de validation
