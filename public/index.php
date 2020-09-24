@@ -80,10 +80,12 @@ $router->map('GET|POST', '/product/add', 'ProductController#add', 'product-add')
 //On a besoin de connaitre l'id du produit modifié. Grâce à Altorouter on peut utliser [i:categoryId] ou [i:id] pour spécifier une categorie en particuler
 $router->map('GET|POST', '/product/update/[i:productId]', 'ProductController#update', 'product-update');
 
-//page connexion
+
+//route le login.
 $router->map('GET|POST', '/login', 'UserController#login', 'user-login');
 
-
+//route le login.  pas de POST  ici
+$router->map('GET', '/logout', 'UserController#logout', 'user-logout');
 
 
 
