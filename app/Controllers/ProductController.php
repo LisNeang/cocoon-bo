@@ -18,6 +18,8 @@ class ProductController extends CoreController
      */
     public function list()
     {
+        //on autorise uniquement les admin et les catalog manager à accéder à cette page
+        $this->checkAuthorization(["admin", "catalog-manager"]);
         //récupère toutes les categories, sous forme d'instance de mon modèle Category
         $products = Product::findAll();
 

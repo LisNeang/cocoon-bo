@@ -3,6 +3,39 @@
 namespace App\Controllers;
 
 class CoreController {
+
+    protected function checkAuthorization($allowedRoles = [])
+    {
+        //si le user n'est pas connecté ...
+        if (empty($_SESSION['userObject'])){
+            //Un message qui s'affichera sur le login
+            $_SESSION['alert'] = "veuillez vous connecter d'abord !";
+
+            //redirige gentiment vers le login
+            $this->redirectToRoute("user-login"); 
+        }
+        //sinon, s'il est connecté
+        else{
+            //récupère les infos du user connecté
+            $user = $_SESSION['userObject'];
+
+            //récupère son rôle
+            $role = $user->getRole();
+        
+            //est-ce que le rôle du user fait parti des rôles autorisés pour cette page ?
+            //si non (le rôle n'est pas autorisé)
+            //in array recherche une aiguille($role du user connecté) dans une botte de foin($allowedRoles)
+            if (!in_array($role, $allowedRoles)){
+
+                //on pète une erreur 403
+                $errorController = new ErrorController();
+                $errorController->err403();
+
+                // on arrête tout ici !
+                die();
+            }
+        }    
+    }
     /**
      * Méthode permettant d'afficher du code HTML en se basant sur les views
      *
