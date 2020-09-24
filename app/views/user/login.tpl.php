@@ -1,4 +1,4 @@
-<a href="<?= $router->generate('main-home') ?>" class="btn btn-success float-right">Retour</a>
+                <a href="<?= $router->generate('main-home') ?>" class="btn btn-success float-right">Retour</a>
 <h2>Se connecter</h2>
 
 <form method="POST" class="mt-5" novalidate="novalidate">
@@ -21,4 +21,6 @@
         <div class="text-danger font-weight-bold">Attention ! Ya des erreurs !!!</div>
     <?php endif; ?>
     <button type="submit" class="btn btn-primary btn-block mt-5">Se connecter</button>
+
+ 
 </form>

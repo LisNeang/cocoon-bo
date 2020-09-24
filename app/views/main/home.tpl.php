@@ -15,6 +15,7 @@
                             <th scope="col"></th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                       <?php foreach($categories as $category): ?>
 

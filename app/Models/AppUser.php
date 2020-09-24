@@ -1,9 +1,10 @@
 <?php 
 
-namespace app\Models;
+namespace App\Models;
 
 use App\Models\CoreModel;
 use App\Utils\Database;
+use PDO;
 
 class AppUser extends CoreModel{
     private $email;
@@ -26,6 +27,54 @@ class AppUser extends CoreModel{
 
         return $stmt->fetchObject(self::class);
     } 
+
+
+    //créer tous les getters et setters ! 
+
+    public static function find($appUserId)
+    {
+
+    }
+
+    public static function findAll()
+    {
+        $pdo = Database::getPDO();
+
+        $sql = "SELECT * FROM app_user 
+                ORDER BY lastname ASC, `role` ASC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        //'App\Models\AppUser'
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+
+    public function insert()
+    {
+        $pdo = Database::getPDO();
+
+        $sql = "INSERT INTO app_user (email, password, firstname, lastname, role, status) 
+                VALUES (:email, :password, :firstname, :lastname, :role, :status)";
+
+        $stmt = $pdo->prepare($sql);
+        $insertedRows = $stmt->execute([
+            ":email" => $this->email, 
+            ":password" => $this->password, 
+            ":firstname" => $this->firstname, 
+            ":lastname" => $this->lastname, 
+            ":role" => $this->role, 
+            ":status" => $this->status
+        ]);
+
+        if ($insertedRows){
+            $this->id = $pdo->lastInsertId();
+            return true;
+        }
+
+        return false;
+    }
+
 
 
     /**
@@ -148,21 +197,7 @@ class AppUser extends CoreModel{
         return $this;
     }
 
-    public static function find($appUserId)
-    {
-
-    }
-
-    public static function findAll()
-    {
-
-    }
-
-    public static function insert()
-    {
-
-    }
-
+   
 
 }
 
