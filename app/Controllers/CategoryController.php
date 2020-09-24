@@ -16,6 +16,8 @@ class CategoryController extends CoreController {
      */
     public function list()
     {
+        //on autorise uniquement les admin et les catalog manager à accéder à cette page
+        $this->checkAuthorization(["admin", "catalog-manager"]);
         //récupère toutes les categories, sous forme d'instance de mon modèle Category
         $categories = Category::findAll();
 
@@ -25,6 +27,8 @@ class CategoryController extends CoreController {
 
     public function add()
     {   
+        //on autorise uniquement les admin à accéder à cette page
+        $this->checkAuthorization(["admin"]);
         // Le dump bloque la redirection du header après validation formulaire produt add ou category add, il faut l'enlever pour que la redirection se fasse
        // dump($_POST);
 
@@ -66,6 +70,8 @@ class CategoryController extends CoreController {
 
     public function update($categoryId)
     {   
+        //on autorise uniquement les admin à accéder à cette page
+        $this->checkAuthorization(["admin"]);
 
         //récupère la catégorie dans la bdd, pour préremplir le form
         $category = Category::find($categoryId);

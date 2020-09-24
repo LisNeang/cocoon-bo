@@ -33,6 +33,8 @@ class ProductController extends CoreController
 
     public function add()
     {
+        //on autorise uniquement les admin à accéder à cette page
+        $this->checkAuthorization(["admin"]);
         // Le dump bloque la redirection du header, il faut l'enlever pour que la redirection se fasse
         //dump($_POST);
 
@@ -107,6 +109,8 @@ class ProductController extends CoreController
     public function update($productId)
     {   
 
+        //on autorise uniquement les admin à accéder à cette page
+        $this->checkAuthorization(["admin"]);
         //récupère le produit dans la bdd, pour préremplir le form
         $product = Product::find($productId);
 

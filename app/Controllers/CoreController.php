@@ -25,6 +25,8 @@ class CoreController {
             //est-ce que le rôle du user fait parti des rôles autorisés pour cette page ?
             //si non (le rôle n'est pas autorisé)
             //in array recherche une aiguille($role du user connecté) dans une botte de foin($allowedRoles)
+            //ça donne ça :   if(!in_array("admin", ["admin", "catalog-manager"])){
+           //}
             if (!in_array($role, $allowedRoles)){
 
                 //on pète une erreur 403
